@@ -1,1 +1,2 @@
-eureka-server:      8761 (default)
+eureka-server:          8761 (default)
+gateway:                8762 (default)
