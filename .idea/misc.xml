@@ -7,6 +7,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/FlixNed_Service/auth/pom.xml" />
+        <option value="$PROJECT_DIR$/FlixNed_Service/service_registration/pom.xml" />
       </list>
     </option>
   </component>

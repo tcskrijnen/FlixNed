@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="auth" />
+        <module name="service_registration" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="auth" target="1.5" />
+      <module name="service_registration" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

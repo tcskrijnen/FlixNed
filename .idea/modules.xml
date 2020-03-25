@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/FlixNed_Service/FlixNed_Service.iml" filepath="$PROJECT_DIR$/FlixNed_Service/FlixNed_Service.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlixNed_Service/auth/auth.iml" filepath="$PROJECT_DIR$/FlixNed_Service/auth/auth.iml" />
       <module fileurl="file://$PROJECT_DIR$/flixned_website/flixned_website.iml" filepath="$PROJECT_DIR$/flixned_website/flixned_website.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FlixNed_Service/service_registration/service_registration.iml" filepath="$PROJECT_DIR$/FlixNed_Service/service_registration/service_registration.iml" />
     </modules>
   </component>
 </project>
