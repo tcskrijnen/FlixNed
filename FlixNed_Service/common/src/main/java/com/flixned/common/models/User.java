@@ -21,8 +21,8 @@ public class User implements UserDetails, Serializable {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
-    private String hash;
+    @Column(name = "password_hash", nullable = false)
+    private String password;
 
     @Column
     private boolean isAccountNonExpired;
@@ -32,6 +32,32 @@ public class User implements UserDetails, Serializable {
     private boolean isAccountNonLocked;
     @Column
     private boolean isCredentialsNonExpired;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "auth_id"))
+    private Set<CustomGrantedAuthority> authorities;
+
+    public User(String email, String password_hash, boolean isAccountNonExpired, boolean isEnabled, boolean isAccountNonLocked, boolean isCredentialsNonExpired, Set<CustomGrantedAuthority> customGrantedAuthorities) {
+        this.password = password_hash;
+        this.email = email;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isEnabled = isEnabled;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.authorities = customGrantedAuthorities;
+    }
+
+    public User() {
+    }
+
+    public void setAuthorities(Set<CustomGrantedAuthority> customGrantedAuthorities) {
+        this.authorities = customGrantedAuthorities;
+    }
 
     public void setAccountNonExpired(boolean accountNonExpired) {
         isAccountNonExpired = accountNonExpired;
@@ -49,46 +75,28 @@ public class User implements UserDetails, Serializable {
         isCredentialsNonExpired = credentialsNonExpired;
     }
 
-    public void setAuthorities(Set<CustomGrantedAuthority> customGrantedAuthorities) {
-        this.authorities = customGrantedAuthorities;
-    }
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "auth_id"))
-    private Set<CustomGrantedAuthority> authorities;
-
-
-    public User() {
-    }
-
-    public User(String email, String hash, boolean isAccountNonExpired, boolean isEnabled, boolean isAccountNonLocked, boolean isCredentialsNonExpired, Set<CustomGrantedAuthority> customGrantedAuthorities){
-        this.email = email;
-        this.hash = hash;
-        this.isAccountNonExpired = isAccountNonExpired;
-        this.isEnabled = isEnabled;
-        this.isAccountNonLocked = isAccountNonLocked;
-        this.isCredentialsNonExpired = isCredentialsNonExpired;
-        this.authorities = customGrantedAuthorities;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public String getPassword() {
-        return hash;
-    }
-
-    public void setPassword(String hash) {
-        this.hash = hash;
+    public String getPasswordHash() {
+        return password;
     }
 
     public String getEmail() {
         return email;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String hash) {
+        this.password = hash;
     }
 
     public void setEmail(String email) {
