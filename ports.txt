@@ -1,5 +1,6 @@
 common-service:         9000
 auth-service:           9010
+customer-service        9020
 
 eureka-server:          8761 (default)
 gateway:                8762 (default)
