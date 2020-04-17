@@ -1,6 +1,6 @@
 package com.flixned.auth;
 
-import com.flixned.common.security.JwtConfig;
+import com.flixned.auth.common.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;

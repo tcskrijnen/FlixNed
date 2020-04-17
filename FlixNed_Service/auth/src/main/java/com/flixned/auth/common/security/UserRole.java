@@ -1,13 +1,13 @@
-package com.flixned.common.security;
+package com.flixned.auth.common.security;
 
-import com.flixned.common.models.CustomGrantedAuthority;
+import com.flixned.auth.common.models.CustomGrantedAuthority;
 import com.google.common.collect.Sets;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.flixned.common.security.UserPermissions.USER_READ;
-import static com.flixned.common.security.UserPermissions.USER_WRITE;
+import static com.flixned.auth.common.security.UserPermissions.USER_READ;
+import static com.flixned.auth.common.security.UserPermissions.USER_WRITE;
 
 
 public enum UserRole {

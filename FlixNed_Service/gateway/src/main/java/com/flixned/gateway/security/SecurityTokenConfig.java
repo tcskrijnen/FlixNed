@@ -1,6 +1,6 @@
 package com.flixned.gateway.security;
 
-import com.flixned.common.security.JwtConfig;
+import com.flixned.gateway.common.security.JwtConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;

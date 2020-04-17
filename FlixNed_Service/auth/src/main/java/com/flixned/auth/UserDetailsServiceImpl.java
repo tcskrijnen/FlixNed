@@ -1,6 +1,6 @@
 package com.flixned.auth;
 
-import com.flixned.common.models.User;
+import com.flixned.auth.common.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

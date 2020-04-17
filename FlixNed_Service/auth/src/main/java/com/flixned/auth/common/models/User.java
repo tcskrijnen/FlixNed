@@ -1,36 +1,26 @@
-package com.flixned.common.models;
+package com.flixned.auth.common.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
-@Entity
-@Inheritance(
-        strategy = InheritanceType.JOINED
-)
 public class User implements UserDetails, Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password_hash", nullable = false)
     private String password;
 
-    @Column
     private boolean isAccountNonExpired;
-    @Column
+
     private boolean isEnabled;
-    @Column
+
     private boolean isAccountNonLocked;
-    @Column
+
     private boolean isCredentialsNonExpired;
 
     @Override
@@ -38,8 +28,6 @@ public class User implements UserDetails, Serializable {
         return authorities;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "auth_id"))
     private Set<CustomGrantedAuthority> authorities;
 
     public User(String email, String password_hash, boolean isAccountNonExpired, boolean isEnabled, boolean isAccountNonLocked, boolean isCredentialsNonExpired, Set<CustomGrantedAuthority> customGrantedAuthorities) {

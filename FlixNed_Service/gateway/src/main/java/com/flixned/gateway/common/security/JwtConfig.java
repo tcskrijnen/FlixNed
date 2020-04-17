@@ -1,4 +1,4 @@
-package com.flixned.common.security;
+package com.flixned.gateway.common.security;
 
 import org.springframework.beans.factory.annotation.Value;
 

@@ -1,7 +1,7 @@
 package com.flixned.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.flixned.common.security.JwtConfig;
+import com.flixned.auth.common.security.JwtConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;

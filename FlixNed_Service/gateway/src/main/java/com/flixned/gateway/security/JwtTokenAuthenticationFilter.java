@@ -1,7 +1,7 @@
 package com.flixned.gateway.security;
 
-import com.flixned.common.models.CustomGrantedAuthority;
-import com.flixned.common.security.JwtConfig;
+import com.flixned.gateway.common.models.CustomGrantedAuthority;
+import com.flixned.gateway.common.security.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

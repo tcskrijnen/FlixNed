@@ -1,6 +1,6 @@
 package com.flixned.customerservice.filters;
 
-import com.flixned.common.models.CustomGrantedAuthority;
+import com.flixned.customerservice.common.models.CustomGrantedAuthority;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.core.annotation.Order;

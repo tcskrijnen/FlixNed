@@ -1,4 +1,4 @@
-package com.flixned.common.security;
+package com.flixned.customerservice.common.security;
 
 public enum UserPermissions {
     // declare all the different permissions here.

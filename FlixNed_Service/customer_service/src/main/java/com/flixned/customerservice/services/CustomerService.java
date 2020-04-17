@@ -1,6 +1,6 @@
 package com.flixned.customerservice.services;
 
-import com.flixned.common.models.User;
+import com.flixned.customerservice.common.models.User;
 import com.flixned.customerservice.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 

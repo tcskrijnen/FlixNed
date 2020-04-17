@@ -1,6 +1,6 @@
 package com.flixned.customerservice.controllers;
 
-import com.flixned.common.models.User;
+import com.flixned.customerservice.common.models.User;
 import com.flixned.customerservice.services.CustomerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

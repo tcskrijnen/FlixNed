@@ -1,6 +1,6 @@
 package com.flixned.customerservice.repositories;
 
-import com.flixned.common.models.User;
+import com.flixned.customerservice.common.models.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

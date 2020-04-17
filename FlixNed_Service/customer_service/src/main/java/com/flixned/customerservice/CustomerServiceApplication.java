@@ -1,6 +1,6 @@
 package com.flixned.customerservice;
 
-import com.flixned.common.models.User;
+import com.flixned.customerservice.common.models.User;
 import com.flixned.customerservice.repositories.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,15 +9,14 @@ import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoCon
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static com.flixned.common.security.UserRole.ADMIN;
+import static com.flixned.customerservice.common.security.UserRole.ADMIN;
+
 
 @EnableEurekaClient
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class, RepositoryRestMvcAutoConfiguration.class})
-@ComponentScan({"com.flixned.common", "com.flixned.customerservice"})
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class CustomerServiceApplication {
     public static void main(String[] args) {
@@ -29,7 +28,7 @@ public class CustomerServiceApplication {
     public CommandLineRunner demo(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         return args -> {
 
-            User user = new User(passwordEncoder.encode("12345"),"test@test.com", true, true, true, true, ADMIN.getGrantedAuthorities());
+            User user = new User("test@test.com",passwordEncoder.encode("12345"), true, true, true, true, ADMIN.getGrantedAuthorities());
 
             customerRepository.save(user);
         };
