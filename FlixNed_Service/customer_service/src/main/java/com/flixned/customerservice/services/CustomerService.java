@@ -1,8 +1,14 @@
 package com.flixned.customerservice.services;
 
+import com.flixned.customerservice.common.dto.RegisterDTO;
+import com.flixned.customerservice.common.models.Customer;
 import com.flixned.customerservice.common.models.User;
+import com.flixned.customerservice.common.utils.AuthenticationUtils;
 import com.flixned.customerservice.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
+
+import static com.flixned.customerservice.common.security.UserRole.ADMIN;
+import static com.flixned.customerservice.common.security.UserRole.USER;
 
 @Service
 public class CustomerService {
@@ -15,5 +21,15 @@ public class CustomerService {
 
     public User getByCustomerByEmail(String email) {
         return customerRepository.findCustomerByEmail(email);
+    }
+
+    public String Registration(RegisterDTO register) {
+
+        User newCustomer = new Customer("12345", register.getEmail(), new AuthenticationUtils().encode(register.getPassword()), true, true, true, true, USER.getGrantedAuthorities());
+
+        customerRepository.save(newCustomer);
+
+        return "saved";
+
     }
 }
