@@ -1,7 +1,5 @@
 package com.flixned.customerservice.common.models;
 
-
-
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;

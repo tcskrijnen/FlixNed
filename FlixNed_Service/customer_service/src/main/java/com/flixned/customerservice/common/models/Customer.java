@@ -12,7 +12,9 @@ public class Customer extends User {
     @Column
     private String CustomerNumber;
 
-    public Customer(String customerNumber, String email, String password_hash, boolean isAccountNonExpired, boolean isEnabled, boolean isAccountNonLocked, boolean isCredentialsNonExpired, Set<CustomGrantedAuthority> customGrantedAuthorities) {
+    public Customer(String customerNumber, String email, String password_hash,
+                    boolean isAccountNonExpired, boolean isEnabled, boolean isAccountNonLocked,
+                    boolean isCredentialsNonExpired, Set<CustomGrantedAuthority> customGrantedAuthorities) {
         super(email, password_hash, isAccountNonExpired, isEnabled, isAccountNonLocked, isCredentialsNonExpired, customGrantedAuthorities);
 
         this.CustomerNumber = customerNumber;
