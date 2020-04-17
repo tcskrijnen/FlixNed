@@ -5,6 +5,7 @@ import com.flixned.customerservice.common.models.Customer;
 import com.flixned.customerservice.common.models.User;
 import com.flixned.customerservice.common.utils.AuthenticationUtils;
 import com.flixned.customerservice.common.utils.RandomString;
+import com.flixned.customerservice.exceptions.BadRequestException;
 import com.flixned.customerservice.exceptions.DatabaseException;
 import com.flixned.customerservice.repositories.CustomerRepository;
 import org.springframework.dao.DataAccessException;
@@ -30,14 +31,21 @@ public class CustomerService {
 
         RandomString rdm = new RandomString();
 
-        User newCustomer = new Customer(rdm.getAlphaNumericString(10), register.getEmail(), new AuthenticationUtils().encode(register.getPassword()), true, true, true, true, USER.getGrantedAuthorities());
+        User userExist = customerRepository.findCustomerByEmail(register.getEmail());
 
-        try{
-            customerRepository.save(newCustomer);
+        if(userExist == null){
+            User newCustomer = new Customer(rdm.getAlphaNumericString(10), register.getEmail(), new AuthenticationUtils().encode(register.getPassword()), true, true, true, true, USER.getGrantedAuthorities());
 
-            return "saved";
-        }catch (DatabaseException ex){
-            throw new DatabaseException("customer not saved");
+            try{
+                customerRepository.save(newCustomer);
+
+                return "saved";
+            }catch (DatabaseException ex){
+                throw new DatabaseException("customer not saved");
+            }
+        }
+        else{
+            throw new BadRequestException("customer already exist");
         }
     }
 }
