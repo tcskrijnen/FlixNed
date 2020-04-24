@@ -8,20 +8,22 @@ import com.flixned.customerservice.common.utils.RandomString;
 import com.flixned.customerservice.exceptions.BadRequestException;
 import com.flixned.customerservice.exceptions.DatabaseException;
 import com.flixned.customerservice.repositories.CustomerRepository;
-import org.springframework.dao.DataAccessException;
+import com.flixned.customerservice.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
-import static com.flixned.customerservice.common.security.UserRole.ADMIN;
 import static com.flixned.customerservice.common.security.UserRole.USER;
 
 @Service
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final UserRepository userRepository;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository, UserRepository userRepository) {
         this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
     }
+
 
     public User getByCustomerByEmail(String email) {
         return customerRepository.findCustomerByEmail(email);
@@ -37,7 +39,7 @@ public class CustomerService {
             User newCustomer = new Customer(rdm.getAlphaNumericString(10), register.getEmail(), new AuthenticationUtils().encode(register.getPassword()), true, true, true, true, USER.getGrantedAuthorities());
 
             try{
-                customerRepository.save(newCustomer);
+                userRepository.save(newCustomer);
 
                 return "saved";
             }catch (DatabaseException ex){

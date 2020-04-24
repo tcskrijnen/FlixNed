@@ -16,7 +16,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @RequestMapping(value = RestURIConstant.getUserByEmail, method = RequestMethod.GET)
+    @RequestMapping(value = RestURIConstant.getCustomerByEmail, method = RequestMethod.GET)
     public @ResponseBody
     User getCustomerByEmail(@RequestParam("email") String email) {
         return customerService.getByCustomerByEmail(email);

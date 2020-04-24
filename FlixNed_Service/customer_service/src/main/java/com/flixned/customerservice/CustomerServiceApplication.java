@@ -3,6 +3,7 @@ package com.flixned.customerservice;
 import com.flixned.customerservice.common.models.Customer;
 import com.flixned.customerservice.common.models.User;
 import com.flixned.customerservice.repositories.CustomerRepository;
+import com.flixned.customerservice.repositories.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,12 +27,12 @@ public class CustomerServiceApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
+    public CommandLineRunner demo(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return args -> {
 
             User user = new Customer("12343245","test@test.com",passwordEncoder.encode("12345"), true, true, true, true, ADMIN.getGrantedAuthorities());
 
-            customerRepository.save(user);
+            userRepository.save(user);
         };
     }
 }

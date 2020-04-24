@@ -1,11 +1,11 @@
 package com.flixned.customerservice.repositories;
 
-import com.flixned.customerservice.common.models.User;
+import com.flixned.customerservice.common.models.Customer;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<User, Long> {
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-    User findCustomerByEmail(String email);
+    Customer findCustomerByEmail(String email);
 }
