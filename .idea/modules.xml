@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/FlixNed.iml" filepath="$PROJECT_DIR$/.idea/FlixNed.iml" />
-      <module fileurl="file://$PROJECT_DIR$/FlixNed_Service/auth/auth.iml" filepath="$PROJECT_DIR$/FlixNed_Service/auth/auth.iml" />
-      <module fileurl="file://$PROJECT_DIR$/FlixNed_Service/customer_service/customer_service.iml" filepath="$PROJECT_DIR$/FlixNed_Service/customer_service/customer_service.iml" />
-      <module fileurl="file://$PROJECT_DIR$/FlixNed_Service/gateway/gateway.iml" filepath="$PROJECT_DIR$/FlixNed_Service/gateway/gateway.iml" />
-      <module fileurl="file://$PROJECT_DIR$/FlixNed_Service/service_registration/service_registration.iml" filepath="$PROJECT_DIR$/FlixNed_Service/service_registration/service_registration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/auth/auth.iml" filepath="$PROJECT_DIR$/auth/auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/customer_service/customer_service.iml" filepath="$PROJECT_DIR$/customer_service/customer_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/service_registration/service_registration.iml" filepath="$PROJECT_DIR$/service_registration/service_registration.iml" />
     </modules>
   </component>
 </project>
