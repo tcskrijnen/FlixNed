@@ -1,3 +1,6 @@
 FROM openjdk:13-jdk-alpine
-COPY target/auth-1.0-SNAPSHOT.jar /home/auth-1.0-SNAPSHOT.jar
-CMD ["java","-jar","/home/auth-1.0-SNAPSHOT.jar"]
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
