@@ -3,12 +3,7 @@ name: Build Auth
 on:
   push:
     branches:
-      - develop
       - master
-    pull_request:
-      branches:
-        - master
-
 jobs:
   test:
     name: test
@@ -37,9 +32,9 @@ jobs:
         run: docker build -f auth/Dockerfile -t flixned .
       - name: Tags
         run: |
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:${{ github.sha }}
+          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:auth-service
           docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:latest
       - name: Push
         run: |
-         docker push ${{ secrets.DOCKER_USER }}/flixned:${{ github.sha }}
+         docker push ${{ secrets.DOCKER_USER }}/flixned:auth-service
          docker push ${{ secrets.DOCKER_USER }}/flixned:latest
