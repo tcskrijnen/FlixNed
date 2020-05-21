@@ -1,4 +1,4 @@
-name: Build Customer Service
+name: Build Gateway Service
 
 on:
   push:
