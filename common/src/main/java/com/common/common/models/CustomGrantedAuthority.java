@@ -2,6 +2,7 @@ package com.common.common.models;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
