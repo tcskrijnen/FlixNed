@@ -19,7 +19,7 @@ public class ContentController {
 
     @RequestMapping(value = RestURIConstant.allMovies, method = RequestMethod.GET)
     public @ResponseBody
-    Iterable<Movie> allmovies() {
-        return movieService.allmovies();
+    Iterable<Movie> allMovies() {
+        return movieService.allMovies();
     }
 }
