@@ -1,6 +1,7 @@
 auth-service:           9010
 customer-service        9020
 content-service         9030
+streaming-service       9040
 
 eureka-server:          8761 (default)
 gateway:                8762 (default)
