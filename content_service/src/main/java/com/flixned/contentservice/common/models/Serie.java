@@ -12,15 +12,21 @@ public class Serie {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    private String serieId;
+
+    @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
+    private String episodeName;
+
+    @Column(nullable = false)
     private int episode;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int season;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private int year;
 
     @Column(nullable = true)
@@ -29,8 +35,10 @@ public class Serie {
     @ElementCollection
     private List<String> cast = new ArrayList<String>();
 
-    public Serie(String title, int episode, int season, int year, Long duration, List<String> cast) {
+    public Serie(String serieId, String title, String episodeName, int episode, int season, int year, Long duration, List<String> cast) {
+        this.serieId = serieId;
         this.title = title;
+        this.episodeName = episodeName;
         this.episode = episode;
         this.season = season;
         this.year = year;
@@ -41,12 +49,28 @@ public class Serie {
     public Serie() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getSerieId() {
+        return serieId;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getEpisodeName() {
+        return episodeName;
+    }
+
+    public void setEpisodeName(String episodeName) {
+        this.episodeName = episodeName;
     }
 
     public int getEpisode() {

@@ -4,9 +4,11 @@ import com.flixned.contentservice.common.models.Movie;
 import com.flixned.contentservice.common.models.Serie;
 import com.flixned.contentservice.repositories.MovieRepository;
 import com.flixned.contentservice.repositories.SerieRepository;
+import com.flixned.contentservice.utils.RandomString;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @EnableEurekaClient
-@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class, RepositoryRestMvcAutoConfiguration.class})
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ContentServiceApplication {
 
@@ -28,17 +30,19 @@ public class ContentServiceApplication {
     public CommandLineRunner demo(MovieRepository movieRepository, SerieRepository serieRepository) {
         return args -> {
 
+            RandomString rdStr = new RandomString();
+
             List<String> cast1 = new ArrayList<>();
             cast1.add("test");
             cast1.add("naam");
 
-            Movie movie1 = new Movie("test", 3000L, cast1, 2019);
+            Movie movie1 = new Movie(rdStr.getAlphaNumericString(8), "test", 3000L, cast1, 2019);
 
             List<String> cast2 = new ArrayList<>();
             cast2.add("test");
             cast2.add("naam");
 
-            Serie serie1 = new Serie("test", 1, 3, 2019, 3000L, cast2);
+            Serie serie1 = new Serie(rdStr.getAlphaNumericString(8),"test", "episode name", 1, 3, 2019, 3000L, cast2);
 
             movieRepository.save(movie1);
             serieRepository.save(serie1);

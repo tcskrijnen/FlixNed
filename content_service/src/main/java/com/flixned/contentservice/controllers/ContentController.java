@@ -4,10 +4,10 @@ import com.flixned.contentservice.common.models.Movie;
 import com.flixned.contentservice.common.models.Serie;
 import com.flixned.contentservice.services.MovieService;
 import com.flixned.contentservice.services.SerieService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller

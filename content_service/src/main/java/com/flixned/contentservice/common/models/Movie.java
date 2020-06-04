@@ -12,6 +12,9 @@ public class Movie {
     private Long id;
 
     @Column(nullable = false, unique = true)
+    private String movieId;
+
+    @Column(nullable = false, unique = true)
     private String title;
 
     @Column(nullable = true)
@@ -23,7 +26,8 @@ public class Movie {
     @Column(nullable = false, unique = true)
     private int year;
 
-    public Movie(String title, Long duration, List<String> cast, int year) {
+    public Movie(String movieId, String title, Long duration, List<String> cast, int year) {
+        this.movieId = movieId;
         this.title = title;
         this.duration = duration;
         this.cast = cast;
@@ -31,6 +35,18 @@ public class Movie {
     }
 
     public Movie() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(String movieId) {
+        this.movieId = movieId;
     }
 
     public String getTitle() {
