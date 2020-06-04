@@ -10,8 +10,35 @@ public class Playlist {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String UserId;
+    private String userId;
 
     @Column(nullable = false, unique = true)
-    private int contentId;
+    private String contentId;
+
+    public Playlist(String userId, String contentId){
+        this.userId = userId;
+        this.contentId = contentId;
+    }
+
+    public Playlist(){}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(String contentId) {
+        this.contentId = contentId;
+    }
 }
