@@ -13,12 +13,22 @@ public class PlaylistService {
     }
 
     public void addMovieToPlaylist(int userId, String movieId) {
-
-        System.out.println(userId);
         Playlist playlist = playlistRepository.findPlaylistByUserId(userId);
 
         playlist.addMovieIdToList(movieId);
 
         playlistRepository.save(playlist);
+    }
+
+    public void addSerieToPlaylist(int userId, String serieId) {
+        Playlist playlist = playlistRepository.findPlaylistByUserId(userId);
+
+        playlist.addSerieIdToList(serieId);
+
+        playlistRepository.save(playlist);
+    }
+
+    public Playlist getPlaylist(int userId){
+        return playlistRepository.findPlaylistByUserId(userId);
     }
 }

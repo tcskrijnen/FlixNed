@@ -33,6 +33,10 @@ public class Playlist {
         this.movieList.add(movieId);
     }
 
+    public void addSerieIdToList(String serieId) {
+        this.serieList.add(serieId);
+    }
+
     public Long getId() { return id; }
 
     public void setId(Long id) {
