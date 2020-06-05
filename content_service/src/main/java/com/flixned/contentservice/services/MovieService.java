@@ -13,7 +13,6 @@ public class MovieService {
         this.movieRepository = movieRepository;
     }
 
-
     public Iterable<Movie> allMovies() {
         return movieRepository.findAll();
     }

@@ -1,6 +1,7 @@
 package com.flixned.contentservice.common.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Playlist {
@@ -10,35 +11,55 @@ public class Playlist {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String userId;
+    private int userId;
 
-    @Column(nullable = false, unique = true)
-    private String contentId;
+    @ElementCollection
+    private Set<String> movieList;
 
-    public Playlist(String userId, String contentId){
+    @ElementCollection
+    private Set<String> serieList;
+
+    public Playlist(int userId, Set<String> movieList, Set<String> serieList) {
         this.userId = userId;
-        this.contentId = contentId;
+        this.movieList = movieList;
+        this.serieList = serieList;
     }
 
-    public Playlist(){}
-
-    public Long getId() {
-        return id;
+    public Playlist() {
     }
+
+
+    public void addMovieIdToList(String movieId) {
+        this.movieList.add(movieId);
+    }
+
+    public Long getId() { return id; }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setUserId(String userId) {
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
-    public String getContentId() {
-        return contentId;
+    public Set<String> getMovieList() {
+        return movieList;
     }
 
-    public void setContentId(String contentId) {
-        this.contentId = contentId;
+    public void setMovieList(Set<String> movieList) {
+        this.movieList = movieList;
+    }
+
+    public Set<String> getSerieList() {
+        return serieList;
+    }
+
+    public void setSerieList(Set<String> serieList) {
+        this.serieList = serieList;
     }
 }

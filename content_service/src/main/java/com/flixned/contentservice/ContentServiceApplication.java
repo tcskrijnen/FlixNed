@@ -1,8 +1,10 @@
 package com.flixned.contentservice;
 
 import com.flixned.contentservice.common.models.Movie;
+import com.flixned.contentservice.common.models.Playlist;
 import com.flixned.contentservice.common.models.Serie;
 import com.flixned.contentservice.repositories.MovieRepository;
+import com.flixned.contentservice.repositories.PlaylistRepository;
 import com.flixned.contentservice.repositories.SerieRepository;
 import com.flixned.contentservice.utils.RandomString;
 import org.springframework.boot.CommandLineRunner;
@@ -15,7 +17,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @EnableEurekaClient
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class, RepositoryRestMvcAutoConfiguration.class})
@@ -27,7 +31,7 @@ public class ContentServiceApplication {
     }
 
     @Bean
-    public CommandLineRunner demo(MovieRepository movieRepository, SerieRepository serieRepository) {
+    public CommandLineRunner demo(MovieRepository movieRepository, SerieRepository serieRepository, PlaylistRepository playlistRepository) {
         return args -> {
 
             RandomString rdStr = new RandomString();
@@ -46,6 +50,13 @@ public class ContentServiceApplication {
 
             movieRepository.save(movie1);
             serieRepository.save(serie1);
+
+            Set<String> movieSet = new HashSet();;
+            Set<String> serieSet = new HashSet();;
+
+            Playlist playlist = new Playlist(1, movieSet, serieSet);
+
+            playlistRepository.save(playlist);
         };
     }
 }
