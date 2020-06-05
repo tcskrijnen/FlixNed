@@ -41,6 +41,8 @@ public class ContentServiceApplication {
             cast1.add("naam");
 
             Movie movie1 = new Movie(rdStr.getAlphaNumericString(8), "test", 3000L, cast1, 2019);
+            Movie movie2 = new Movie(rdStr.getAlphaNumericString(8), "test2", 2000L, cast1, 2018);
+            Movie movie3 = new Movie(rdStr.getAlphaNumericString(8), "test3", 2000L, cast1, 2015);
 
             List<String> cast2 = new ArrayList<>();
             cast2.add("test");
@@ -49,6 +51,8 @@ public class ContentServiceApplication {
             Serie serie1 = new Serie(rdStr.getAlphaNumericString(8),"test", "episode name", 1, 3, 2019, 3000L, cast2);
 
             movieRepository.save(movie1);
+            movieRepository.save(movie2);
+            movieRepository.save(movie3);
             serieRepository.save(serie1);
 
             Set<String> movieSet = new HashSet();;
