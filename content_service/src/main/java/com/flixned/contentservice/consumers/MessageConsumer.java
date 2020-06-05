@@ -11,6 +11,8 @@ public class MessageConsumer {
 
     @RabbitListener(queues = "#{userServiceQueue.name}")
     public void receiveRegional(String message) throws InterruptedException {
+        int userId = Integer.parseInt(message);
+        playlistService.createPlaylist(userId);
         System.out.println(message);
     }
 }
