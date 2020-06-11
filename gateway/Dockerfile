@@ -1,7 +1,4 @@
 FROM openjdk:13-jdk-alpine
-WORKDIR /tmp
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+EXPOSE 8762
+ADD target/gateway-1.0-SNAPSHOT.jar gateway-1.0-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","/gateway-1.0-SNAPSHOT.jar"]
