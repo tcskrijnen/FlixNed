@@ -18,6 +18,11 @@ jobs:
         run: mvn -B clean package -DskipTests --file service_registration/pom.xml
       - name: Maven Verify
         run: mvn -B clean verify --file service_registration/pom.xml
+      - name: Build artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: artifact
+          path: service_registration/target/service_registration-1.0-SNAPSHOT.jar
 
   deployment:
     runs-on: ubuntu-latest
@@ -25,10 +30,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Download Maven build artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: artifact
+      - uses: actions/checkout@v2
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build
-        run: docker build -f service_registration/Dockerfile -t flixned .
+        run: |
+          mkdir -p service_registration/target
+          mv artifact/service_registration-1.0-SNAPSHOT.jar service_registration/target
+          docker build -f service_registration/Dockerfile -t flixned service_registration
       - name: Tags
         run: |
           docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:serviceregistration-service
