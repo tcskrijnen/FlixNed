@@ -1,4 +1,6 @@
 FROM openjdk:13-jdk-alpine
-EXPOSE 8761
-ADD target/service_registration-1.0-SNAPSHOT.jar service_registration-1.0-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","/service_registration-1.0-SNAPSHOT.jar"]
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
