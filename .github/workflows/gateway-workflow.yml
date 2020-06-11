@@ -1,4 +1,4 @@
-name: Build Customer Service
+name: Build Gateway Service
 
 on:
   push:
@@ -15,9 +15,9 @@ jobs:
         with:
           java-version: 13
       - name: Maven Package
-        run: mvn -B clean package -DskipTests --file customer_service/pom.xml
+        run: mvn -B clean package -DskipTests --file gateway/pom.xml
       - name: Maven Verify
-        run: mvn -B clean verify --file customer_service/pom.xml
+        run: mvn -B clean verify --file gateway/pom.xml
 
 
   deployment:
@@ -29,12 +29,10 @@ jobs:
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build
-        run: docker build -f customer_service/Dockerfile -t flixned .
+        run: docker build -f gateway/Dockerfile -t flixned .
       - name: Tags
         run: |
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:customer_service
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:latest
+          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:gateway-service
       - name: Push
         run: |
-         docker push ${{ secrets.DOCKER_USER }}/flixned:customer_service
-         docker push ${{ secrets.DOCKER_USER }}/flixned:latest
+         docker push ${{ secrets.DOCKER_USER }}/flixned:gateway-service

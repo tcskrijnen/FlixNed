@@ -33,8 +33,6 @@ jobs:
       - name: Tags
         run: |
           docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:serviceregistration-service
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:latest
       - name: Push
         run: |
          docker push ${{ secrets.DOCKER_USER }}/flixned:serviceregistration-service
-         docker push ${{ secrets.DOCKER_USER }}/flixned:latest
