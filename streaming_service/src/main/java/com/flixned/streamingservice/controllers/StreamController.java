@@ -5,6 +5,7 @@ import com.flixned.streamingservice.services.StreamService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -20,5 +21,11 @@ public class StreamController {
     public @ResponseBody
     Iterable<Stream> allStreams() {
         return streamService.allStreams();
+    }
+
+    @RequestMapping(value = RestURIConstant.getStream, method = RequestMethod.GET)
+    public @ResponseBody
+    Stream getStream(@RequestParam("contentId") String contentId) {
+        return streamService.getStream(contentId);
     }
 }

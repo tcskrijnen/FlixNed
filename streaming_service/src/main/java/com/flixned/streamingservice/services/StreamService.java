@@ -16,4 +16,8 @@ public class StreamService {
     public Iterable<Stream> allStreams() {
         return streamRepository.findAll();
     }
+
+    public Stream getStream(String contentId) {
+        return streamRepository.getStreamByContentId(contentId);
+    }
 }
