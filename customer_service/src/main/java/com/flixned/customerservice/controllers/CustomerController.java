@@ -34,6 +34,8 @@ public class CustomerController {
     @RequestMapping(value = RestURIConstant.test, method = RequestMethod.GET)
     public @ResponseBody
     String test() {
+        customerService.test();
+
         return "test";
     }
 }

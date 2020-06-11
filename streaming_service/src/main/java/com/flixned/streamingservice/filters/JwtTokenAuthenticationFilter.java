@@ -1,6 +1,6 @@
-package com.flixned.gateway.filters;
+package com.flixned.streamingservice.filters;
 
-import com.flixned.gateway.common.models.CustomGrantedAuthority;
+import com.flixned.streamingservice.common.models.CustomGrantedAuthority;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.core.annotation.Order;

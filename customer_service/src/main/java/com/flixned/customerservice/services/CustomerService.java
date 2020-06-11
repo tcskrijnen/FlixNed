@@ -7,6 +7,7 @@ import com.flixned.customerservice.common.utils.AuthenticationUtils;
 import com.flixned.customerservice.common.utils.RandomString;
 import com.flixned.customerservice.exceptions.BadRequestException;
 import com.flixned.customerservice.exceptions.DatabaseException;
+import com.flixned.customerservice.producers.MessageProducer;
 import com.flixned.customerservice.repositories.CustomerRepository;
 import com.flixned.customerservice.repositories.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,13 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final UserRepository userRepository;
+    private final MessageProducer messageProducer;
 
-    public CustomerService(CustomerRepository customerRepository, UserRepository userRepository) {
+    public CustomerService(CustomerRepository customerRepository, UserRepository userRepository, MessageProducer messageProducer) {
         this.customerRepository = customerRepository;
         this.userRepository = userRepository;
+        this.messageProducer = messageProducer;
     }
-
 
     public User getByCustomerByEmail(String email) {
         return customerRepository.findCustomerByEmail(email);
@@ -41,6 +43,8 @@ public class CustomerService {
             try{
                 userRepository.save(newCustomer);
 
+                messageProducer.sendRegisterMessage(newCustomer.getId().toString());
+
                 return "saved";
             }catch (DatabaseException ex){
                 throw new DatabaseException("customer not saved");
@@ -49,5 +53,9 @@ public class CustomerService {
         else{
             throw new BadRequestException("customer already exist");
         }
+    }
+
+    public void test(){
+        messageProducer.sendRegisterMessage("pp");
     }
 }
