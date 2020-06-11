@@ -48,7 +48,10 @@ public class ContentServiceApplication {
             cast2.add("test");
             cast2.add("naam");
 
-            Serie serie1 = new Serie("93928301","test", "testdescription", "episode name", 1, 1, 2019, 3000L, cast2, "https://storage.googleapis.com/contentimages/vikings.jpg");
+            Serie serie1 = new Serie("93928301","Vikings",
+                    "Ragnar Lothbrok is determined to sail west to discover new lands " +
+                            "and riches despite and intimidating warning " +
+                            "from Earl Haroldson", "Rites of Passage", 1, 1, 2013, 3000L, cast2, "https://storage.googleapis.com/contentimages/vikings.jpg");
 
             movieRepository.save(movie1);
             movieRepository.save(movie2);
