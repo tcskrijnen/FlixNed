@@ -34,11 +34,11 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: artifact
-      - uses: actions/checkout@v2
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build
+      - name: build
         run: |
+          pwd
           mkdir -p service_registration/target
           mv artifact/service_registration-1.0-SNAPSHOT.jar service_registration/target
           docker build -f service_registration/Dockerfile -t flixned service_registration
