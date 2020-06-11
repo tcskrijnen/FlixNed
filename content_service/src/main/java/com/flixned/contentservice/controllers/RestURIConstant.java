@@ -3,7 +3,11 @@ package com.flixned.contentservice.controllers;
 public class RestURIConstant {
     public static final String allMovies = "/movie/all";
 
+    public static final String getMovie = "/movie/getMovie";
+
     public static final String allSeries = "/serie/all";
+
+    public static final String getSerie = "/serie/getSerie";
 
     public static final String getPlaylist = "/playlist/getPlaylist";
 

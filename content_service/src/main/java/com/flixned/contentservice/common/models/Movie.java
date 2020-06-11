@@ -17,7 +17,10 @@ public class Movie {
     @Column(nullable = false, unique = true)
     private String title;
 
-    @Column(nullable = true)
+    @Column()
+    private String description;
+
+    @Column()
     private Long duration;
 
     @ElementCollection
@@ -26,12 +29,17 @@ public class Movie {
     @Column(nullable = false, unique = true)
     private int year;
 
-    public Movie(String movieId, String title, Long duration, List<String> cast, int year) {
+    @Column()
+    private String imageUrl;
+
+    public Movie(String movieId, String title, String description, Long duration, List<String> cast, int year, String imageUrl) {
         this.movieId = movieId;
         this.title = title;
+        this.description = description;
         this.duration = duration;
         this.cast = cast;
         this.year = year;
+        this.imageUrl = imageUrl;
     }
 
     public Movie() {
@@ -57,6 +65,14 @@ public class Movie {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public Long getDuration() {
         return duration;
     }
@@ -79,5 +95,13 @@ public class Movie {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -17,33 +17,42 @@ public class Serie {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Column()
+    private String description;
+
+    @Column()
     private String episodeName;
 
-    @Column(nullable = false)
+    @Column()
     private int episode;
 
-    @Column(nullable = false)
+    @Column()
     private int season;
 
-    @Column(nullable = false)
+    @Column()
     private int year;
 
-    @Column(nullable = true)
+    @Column()
     private Long duration;
 
     @ElementCollection
     private List<String> cast = new ArrayList<String>();
 
-    public Serie(String serieId, String title, String episodeName, int episode, int season, int year, Long duration, List<String> cast) {
+    @Column()
+    private String imageUrl;
+
+    public Serie(String serieId, String title, String description, String episodeName, int episode, int season,
+                 int year, Long duration, List<String> cast, String imageUrl) {
         this.serieId = serieId;
         this.title = title;
+        this.description = description;
         this.episodeName = episodeName;
         this.episode = episode;
         this.season = season;
         this.year = year;
         this.duration = duration;
         this.cast = cast;
+        this.imageUrl = imageUrl;
     }
 
     public Serie() {
@@ -57,12 +66,24 @@ public class Serie {
         return serieId;
     }
 
+    public void setSerieId(String serieId) {
+        this.serieId = serieId;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getEpisodeName() {
@@ -111,5 +132,13 @@ public class Serie {
 
     public void setCast(List<String> cast) {
         this.cast = cast;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

@@ -56,4 +56,16 @@ public class ContentController {
 
         return playlistService.getPlaylist(userId);
     }
+
+    @RequestMapping(value = RestURIConstant.getMovie, method = RequestMethod.GET)
+    public @ResponseBody
+    Movie getMovie(@RequestParam("movieId") String movieId) {
+        return movieService.getMovieById(movieId);
+    }
+
+    @RequestMapping(value = RestURIConstant.getSerie, method = RequestMethod.GET)
+    public @ResponseBody
+    Serie getSerie(@RequestParam("serieId") String serieId) {
+        return serieService.getSerieById(serieId);
+    }
 }

@@ -10,7 +10,7 @@ public class MessageConsumer {
     private PlaylistService playlistService;
 
     @RabbitListener(queues = "#{userServiceQueue.name}")
-    public void receiveRegional(String message) throws InterruptedException {
+    public void receivePlaylist(String message) throws InterruptedException {
         int userId = Integer.parseInt(message);
         playlistService.createPlaylist(userId);
         System.out.println(message);

@@ -16,4 +16,8 @@ public class MovieService {
     public Iterable<Movie> allMovies() {
         return movieRepository.findAll();
     }
+
+    public Movie getMovieById(String movieId){
+        return movieRepository.getMovieByMovieId(movieId);
+    }
 }
