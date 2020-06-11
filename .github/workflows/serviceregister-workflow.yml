@@ -16,11 +16,8 @@ jobs:
           java-version: 13
       - name: Maven Package
         run: mvn -B clean package -DskipTests --file service_registration/pom.xml
-        path: ./target #
       - name: Maven Verify
         run: mvn -B clean verify --file service_registration/pom.xml
-        path: ./target # if you maven build jar package to 'target' folder, specify value here.
-
 
   deployment:
     runs-on: ubuntu-latest
