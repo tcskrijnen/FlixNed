@@ -1,7 +1,6 @@
 FROM openjdk:13-jdk-alpine
-WORKDIR /tmp
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+ARG BUILD_DIR=build
+COPY ${BUILD_DIR}/libs /app/lib/
+ENTRYPOINT ["java","-jar","app/lib/gs-spring-boot-docker-0.1.0.jar"]
