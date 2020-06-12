@@ -18,7 +18,11 @@ jobs:
         run: mvn -B clean package -DskipTests --file auth/pom.xml
       - name: Maven Verify
         run: mvn -B clean verify --file auth/pom.xml
-
+      - name: Build artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: artifact
+          path: auth/target/auth-1.0-SNAPSHOT.jar
 
   deployment:
     runs-on: ubuntu-latest
@@ -26,15 +30,20 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: Download Maven build artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: artifact
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build
-        run: docker build -f auth/Dockerfile -t flixned .
+      - name: build
+        run: |
+          mkdir -p auth/target
+          mv artifact/auth-1.0-SNAPSHOT.jar auth/target
+          docker build -f auth/Dockerfile -t flixned auth
       - name: Tags
         run: |
           docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:auth-service
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:latest
       - name: Push
         run: |
-         docker push ${{ secrets.DOCKER_USER }}/flixned:auth-service
-         docker push ${{ secrets.DOCKER_USER }}/flixned:latest
+          docker push ${{ secrets.DOCKER_USER }}/flixned:auth-service
