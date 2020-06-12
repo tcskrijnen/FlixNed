@@ -22,7 +22,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: artifact
-          path: content_service/target/auth-1.0-SNAPSHOT.jar
+          path: content_service/target/content_service-1.0-SNAPSHOT.jar
 
   deployment:
     runs-on: ubuntu-latest

@@ -39,7 +39,7 @@ jobs:
       - name: build
         run: |
           mkdir -p customer_service/target
-          mv artifact/customer_service-1.0-SNAPSHOT customer_service/target
+          mv artifact/customer_service-1.0-SNAPSHOT.jar customer_service/target
           docker build -f customer_service/Dockerfile -t flixned customer_service
       - name: Tags
         run: |
