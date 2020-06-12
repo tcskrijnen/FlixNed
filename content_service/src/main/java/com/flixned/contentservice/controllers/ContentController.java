@@ -37,16 +37,16 @@ public class ContentController {
         return serieService.allSeries();
     }
 
-    @RequestMapping(value = RestURIConstant.addMovieToPlaylist,  method = RequestMethod.POST)
+    @RequestMapping(value = RestURIConstant.addMovieToPlaylist, method = RequestMethod.GET)
     public @ResponseBody
-    String addMovieToPlaylist(Integer userId, String movieId) {
+    String addMovieToPlaylist(@RequestParam("userId") int userId, @RequestParam("movieId") String movieId) {
         playlistService.addMovieToPlaylist(userId, movieId);
         return "saved";
     }
 
-    @RequestMapping(value = RestURIConstant.addSerieToPlaylist,  method = RequestMethod.POST)
+    @RequestMapping(value = RestURIConstant.addSerieToPlaylist, method = RequestMethod.GET)
     public @ResponseBody
-    String addSerieToPlaylist(Integer userId, String serieId) {
+    String addSerieToPlaylist(@RequestParam("userId") int userId, @RequestParam("serieId") String serieId) {
         playlistService.addSerieToPlaylist(userId, serieId);
         return "saved";
     }
