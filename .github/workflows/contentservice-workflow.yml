@@ -1,4 +1,4 @@
-name: Build Service Register
+name: Build Content Service
 
 on:
   push:
@@ -15,14 +15,14 @@ jobs:
         with:
           java-version: 13
       - name: Maven Package
-        run: mvn -B clean package -DskipTests --file service_registration/pom.xml
+        run: mvn -B clean package -DskipTests --file content_service/pom.xml
       - name: Maven Verify
-        run: mvn -B clean verify --file service_registration/pom.xml
+        run: mvn -B clean verify --file content_service/pom.xml
       - name: Build artifact
         uses: actions/upload-artifact@v1
         with:
           name: artifact
-          path: service_registration/target/service_registration-1.0-SNAPSHOT.jar
+          path: content_service/target/auth-1.0-SNAPSHOT.jar
 
   deployment:
     runs-on: ubuntu-latest
@@ -38,12 +38,12 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: build
         run: |
-          mkdir -p service_registration/target
-          mv artifact/service_registration-1.0-SNAPSHOT.jar service_registration/target
-          docker build -f service_registration/Dockerfile -t flixned service_registration
+          mkdir -p content_service/target
+          mv artifact/content_service-1.0-SNAPSHOT.jar content_service/target
+          docker build -f content_service/Dockerfile -t flixned content_service
       - name: Tags
         run: |
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:serviceregistration-service
+          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:content-service
       - name: Push
         run: |
-         docker push ${{ secrets.DOCKER_USER }}/flixned:serviceregistration-service
+          docker push ${{ secrets.DOCKER_USER }}/flixned:content-service
