@@ -1,5 +1,6 @@
 package com.flixned.contentservice.controllers;
 
+import com.flixned.contentservice.common.dto.PlaylistDTO;
 import com.flixned.contentservice.common.models.Movie;
 import com.flixned.contentservice.common.models.Playlist;
 import com.flixned.contentservice.common.models.Serie;
@@ -53,7 +54,7 @@ public class ContentController {
 
     @RequestMapping(value = RestURIConstant.getPlaylist, method = RequestMethod.GET)
     public @ResponseBody
-    Playlist getPlaylist(@RequestParam("userId") int userId) {
+    PlaylistDTO getPlaylist(@RequestParam("userId") int userId) {
 
         return playlistService.getPlaylist(userId);
     }

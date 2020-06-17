@@ -16,7 +16,11 @@ public class MessageProducer {
     private DirectExchange directExchange;
 
     public void sendRegisterMessage(String message) {
-        rabbitTemplate.convertAndSend(directExchange.getName(), "message", message);
+        rabbitTemplate.convertAndSend(directExchange.getName(), "register", message);
+    }
+
+    public void deleteUserMessage(String message) {
+        rabbitTemplate.convertAndSend(directExchange.getName(), "delete", message);
     }
 
 }

@@ -15,13 +15,23 @@ public class MessageConsumerConfig {
     }
 
     @Bean
-    public Queue userServiceQueue() {
+    public Queue registerQueue() {
         return new AnonymousQueue();
     }
 
     @Bean
-    public Binding bindingUserService(@Qualifier("user-service-exchange") DirectExchange directExchangeSimulator, Queue userServiceQueue) {
-        return BindingBuilder.bind(userServiceQueue).to(directExchangeSimulator).with("message");
+    public Queue deleteQueue() {
+        return new AnonymousQueue();
+    }
+
+    @Bean
+    public Binding bindingRegisterUserService(@Qualifier("user-service-exchange") DirectExchange directExchangeUserService, Queue registerQueue) {
+        return BindingBuilder.bind(registerQueue).to(directExchangeUserService).with("register");
+    }
+
+    @Bean
+    public Binding bindingDeleteUserService(@Qualifier("user-service-exchange") DirectExchange directExchangeUserService, Queue deleteQueue) {
+        return BindingBuilder.bind(deleteQueue).to(directExchangeUserService).with("delete");
     }
 
     @Bean
