@@ -28,7 +28,6 @@ public class UserController {
         return userRepository.findUserByEmail(email);
     }
 
-    //@PreAuthorize("isAuthenticated()")
     @RequestMapping(value = RestURIConstant.current, method = RequestMethod.GET)
     public @ResponseBody
     User current() {

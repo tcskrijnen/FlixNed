@@ -31,6 +31,10 @@ public class CustomerService {
         return customerRepository.findCustomerByEmail(email);
     }
 
+    public User getByCustomerById(int userId) {
+        return customerRepository.findCustomerById(Integer.toUnsignedLong(userId));
+    }
+
     public String deleteCustomer(int userId){
         try {
             customerRepository.delete(customerRepository.findCustomerById(Integer.toUnsignedLong(userId)));

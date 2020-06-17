@@ -22,6 +22,12 @@ public class CustomerController {
         return customerService.getByCustomerByEmail(email);
     }
 
+    @RequestMapping(value = RestURIConstant.getUserById, method = RequestMethod.GET)
+    public @ResponseBody
+    User getCustomerById(@RequestParam("userId") int userId) {
+        return customerService.getByCustomerById(userId);
+    }
+
     @RequestMapping(value = RestURIConstant.deleteCustomerById, method = RequestMethod.GET)
     public @ResponseBody
     String deleteUser(@RequestParam("userId") String userId) {
