@@ -1,4 +1,4 @@
 FROM openjdk:13-jdk-alpine
 EXPOSE 9020
-COPY customer_service-1.0-SNAPSHOT.jar /customer_service-1.0-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","/customer_service-1.0-SNAPSHOT.jar"]
+COPY target/auth-1.0-SNAPSHOT.jar /auth-1.0-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","/auth-1.0-SNAPSHOT.jar"]
