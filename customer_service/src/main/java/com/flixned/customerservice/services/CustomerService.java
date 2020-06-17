@@ -31,6 +31,16 @@ public class CustomerService {
         return customerRepository.findCustomerByEmail(email);
     }
 
+    public String deleteCustomer(int userId){
+        try {
+            customerRepository.delete(customerRepository.findCustomerById(Integer.toUnsignedLong(userId)));
+            messageProducer.deleteUserMessage(Integer.toString(userId));
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
+        return "Account deleted.";
+    }
+
     public String Registration(RegisterDTO register) {
 
         RandomString rdm = new RandomString();
@@ -42,7 +52,6 @@ public class CustomerService {
 
             try{
                 userRepository.save(newCustomer);
-
                 messageProducer.sendRegisterMessage(newCustomer.getId().toString());
 
                 return "saved";

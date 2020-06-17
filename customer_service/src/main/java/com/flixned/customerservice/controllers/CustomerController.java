@@ -22,6 +22,12 @@ public class CustomerController {
         return customerService.getByCustomerByEmail(email);
     }
 
+    @RequestMapping(value = RestURIConstant.deleteCustomerById, method = RequestMethod.GET)
+    public @ResponseBody
+    String deleteUser(@RequestParam("userId") String userId) {
+        return customerService.deleteCustomer(Integer.parseInt(userId));
+    }
+
     @PostMapping(value = RestURIConstant.register)
     public @ResponseBody
     String customerRegister(@RequestBody String customer) {
@@ -34,8 +40,6 @@ public class CustomerController {
     @RequestMapping(value = RestURIConstant.test, method = RequestMethod.GET)
     public @ResponseBody
     String test() {
-        customerService.test();
-
         return "test";
     }
 }

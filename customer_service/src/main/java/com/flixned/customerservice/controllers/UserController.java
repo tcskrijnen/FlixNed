@@ -36,4 +36,5 @@ public class UserController {
         final String email = (String) auth.getPrincipal();
         return userRepository.findUserByEmail(email);
     }
+
 }

@@ -49,16 +49,17 @@ public class PlaylistService {
         List<Serie> series = new ArrayList<>();
         List<Movie> movies = new ArrayList<>();
 
-        for (String serieId: playlist.getSerieList()) {
-            Serie serie = serieRepository.getSerieBySerieId(serieId);
-            series.add(serie);
-        }
+        if(playlist != null){
+            for (String serieId: playlist.getSerieList()) {
+                Serie serie = serieRepository.getSerieBySerieId(serieId);
+                series.add(serie);
+            }
 
-        for (String movieId: playlist.getMovieList()) {
-            Movie movie = movieRepository.getMovieByMovieId(movieId);
-            movies.add(movie);
+            for (String movieId: playlist.getMovieList()) {
+                Movie movie = movieRepository.getMovieByMovieId(movieId);
+                movies.add(movie);
+            }
         }
-
         return new PlaylistDTO(series, movies);
     }
 
@@ -69,5 +70,9 @@ public class PlaylistService {
         Playlist playlist = new Playlist(userId, movieSet, serieSet);
 
         playlistRepository.save(playlist);
+    }
+
+    public void deletePlaylist(int userId){
+        playlistRepository.delete(playlistRepository.findPlaylistByUserId(userId));
     }
 }

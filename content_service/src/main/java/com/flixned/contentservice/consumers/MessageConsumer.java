@@ -9,10 +9,17 @@ public class MessageConsumer {
     @Autowired
     private PlaylistService playlistService;
 
-    @RabbitListener(queues = "#{userServiceQueue.name}")
+    @RabbitListener(queues = "#{registerQueue.name}")
     public void receivePlaylist(String message) throws InterruptedException {
         int userId = Integer.parseInt(message);
         playlistService.createPlaylist(userId);
+        System.out.println(message);
+    }
+
+    @RabbitListener(queues = "#{deleteQueue.name}")
+    public void deleteQueue(String message) throws InterruptedException {
+        int userId = Integer.parseInt(message);
+        playlistService.deletePlaylist(userId);
         System.out.println(message);
     }
 }
