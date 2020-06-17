@@ -59,8 +59,11 @@ public class PlaylistService {
                 Movie movie = movieRepository.getMovieByMovieId(movieId);
                 movies.add(movie);
             }
+            return new PlaylistDTO(series, movies);
         }
-        return new PlaylistDTO(series, movies);
+
+        return null;
+
     }
 
     public void createPlaylist(int userId){
