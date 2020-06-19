@@ -1,4 +1,4 @@
-package com.flixned.gateway.security;
+package com.flixned.gateway.common.security;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
