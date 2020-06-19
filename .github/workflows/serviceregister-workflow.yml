@@ -28,7 +28,7 @@ jobs:
         uses: warchant/setup-sonar-scanner@v1
       - name: run scan
         run: sonar-scanner
-          -Dsonar.host.url=34.91.252.251:9000
+          -Dsonar.host.url=http://34.91.252.251:9000
           -Dsonar.projectKey=flixned-service_registration
           -Dsonar.sources=./service_registration/src/main/java
           -Dsonar.java.binaries=./service_registration/target
