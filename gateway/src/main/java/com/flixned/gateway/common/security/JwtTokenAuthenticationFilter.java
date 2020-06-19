@@ -1,4 +1,4 @@
-package com.flixned.gateway.security;
+package com.flixned.gateway.common.security;
 
 import com.flixned.gateway.common.models.CustomGrantedAuthority;
 import com.flixned.gateway.common.security.JwtConfig;
