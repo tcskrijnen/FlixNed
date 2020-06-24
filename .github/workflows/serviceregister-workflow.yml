@@ -29,14 +29,6 @@ jobs:
           name: artifact
           path: service_registration/target/service_registration-1.0-SNAPSHOT.jar
 
-      - name: Setup sonar scanner
-        uses: warchant/setup-sonar-scanner@v1
-      - name: run scan
-        run: sonar-scanner
-          -Dsonar.host.url=http://34.91.252.251:9000
-          -Dsonar.projectKey=flixned-service_registration
-          -Dsonar.sources=./service_registration/src/main/java
-          -Dsonar.java.binaries=./service_registration/target
 
   deployment:
     runs-on: ubuntu-latest
@@ -55,7 +47,7 @@ jobs:
         run: |
           mkdir -p service_registration/target
           mv artifact/service_registration-1.0-SNAPSHOT.jar service_registration/target
-          docker build . -t $REPO:latest -t $REPO:${GITHUB_SHA::8} -f service_registration/Dockerfile
+          docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} -f .service_registration/Dockerfile
       - name: Push
         run: |
          docker push ${{ secrets.DOCKER_USER }}/$REPO
