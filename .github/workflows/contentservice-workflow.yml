@@ -4,6 +4,18 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "**"
+      - "content_service/**"
+      - "!customer_service/**"
+      - "!.idea/**"
+      - "!service_registration/**"
+      - "!auth/**"
+      - "!common/**"
+      - "!gateway/**"
+      - "!streaming_service/**"
+      - "!.github/workflows/**"
+      - ".github/workflows/customerservice-workflow.yml"
 jobs:
   test:
     name: test
@@ -23,6 +35,14 @@ jobs:
         with:
           name: artifact
           path: content_service/target/content_service-1.0-SNAPSHOT.jar
+      - name: Setup sonar scanner
+        uses: warchant/setup-sonar-scanner@v1
+      - name: run scan
+        run: sonar-scanner
+          -Dsonar.host.url=http://34.91.252.251:9000
+          -Dsonar.projectKey=flixned-contentservice
+          -Dsonar.sources=./content_service/src/main/java
+          -Dsonar.java.binaries=./content_service/target
 
   deployment:
     runs-on: ubuntu-latest
