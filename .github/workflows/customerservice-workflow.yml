@@ -35,6 +35,8 @@ jobs:
         with:
           name: artifact
           path: customer_service/target/customer_service-1.0-SNAPSHOT.jar
+      - name: Setup sonar scanner
+        uses: warchant/setup-sonar-scanner@v1
       - name: run scan
         run: sonar-scanner
           -Dsonar.host.url=http://34.91.252.251:9000
