@@ -47,7 +47,7 @@ jobs:
         run: |
           mkdir -p service_registration/target
           mv artifact/service_registration-1.0-SNAPSHOT.jar service_registration/target
-          docker build -t $REPO:latest -t $REPO:${GITHUB_SHA::8} -f .service_registration/Dockerfile
+          docker build . -t $REPO:latest -t $REPO:${GITHUB_SHA::8} -f .service_registration/Dockerfile
       - name: Push
         run: |
          docker push ${{ secrets.DOCKER_USER }}/$REPO
