@@ -55,11 +55,7 @@ jobs:
         run: |
           mkdir -p service_registration/target
           mv artifact/service_registration-1.0-SNAPSHOT.jar service_registration/target
-#          docker build -f service_registration/Dockerfile -t flixned service_registration
           docker build . -t $REPO:latest -t $REPO:${GITHUB_SHA::8} -f ./Dockerfile
-#      - name: Tags
-##        run: |
-##          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:serviceregistration-service
       - name: Push
         run: |
          docker push ${{ secrets.DOCKER_USER }}/$REPO
