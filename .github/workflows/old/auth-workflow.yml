@@ -4,6 +4,18 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "**"
+      - "auth/**"
+      - "!customer_service/**"
+      - "!.idea/**"
+      - "!service_registration/**"
+      - "!common/**"
+      - "!content_service/**"
+      - "!gateway/**"
+      - "!streaming_service/**"
+      - "!.github/workflows/**"
+      - ".github/workflows/customerservice-workflow.yml"
 jobs:
   test:
     name: test
@@ -23,11 +35,18 @@ jobs:
         with:
           name: artifact
           path: auth/target/auth-1.0-SNAPSHOT.jar
+      - name: run scan
+        run: sonar-scanner
+          -Dsonar.host.url=http://34.91.252.251:9000
+          -Dsonar.projectKey=flixned-auth
+          -Dsonar.sources=./auth/src/main/java
+          -Dsonar.java.binaries=./auth/target
 
   deployment:
     runs-on: ubuntu-latest
     needs: test
-
+    env:
+      REPO: ${{ secrets.DOCKERHUB_AUTH}}
     steps:
       - uses: actions/checkout@v2
       - name: Download Maven build artifact
@@ -43,7 +62,8 @@ jobs:
           docker build -f auth/Dockerfile -t flixned auth
       - name: Tags
         run: |
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:auth-service
+          docker tag flixned ${{ secrets.DOCKER_USER }}/$REPO:${GITHUB_SHA::8}
+          docker tag flixned ${{ secrets.DOCKER_USER }}/$REPO:latest
       - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/flixned:auth-service
+          docker push ${{ secrets.DOCKER_USER }}/$REPO
