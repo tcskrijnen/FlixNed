@@ -4,6 +4,18 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "**"
+      - "!service_registration/**"
+      - "!.idea/**"
+      - "!auth/**"
+      - "!customer_service/**"
+      - "!common/**"
+      - "!content_service/**"
+      - "gateway/**"
+      - "!streaming_service/**"
+      - "!.github/workflows/**"
+      - ".github/workflows/serviceregister-workflow.yml"
 jobs:
   test:
     name: test
@@ -23,11 +35,20 @@ jobs:
         with:
           name: artifact
           path: gateway/target/gateway-1.0-SNAPSHOT.jar
+      - name: Setup sonar scanner
+        uses: warchant/setup-sonar-scanner@v1
+      - name: run scan
+        run: sonar-scanner
+          -Dsonar.host.url=http://34.91.252.251:9000
+          -Dsonar.projectKey=flixned-gateway
+          -Dsonar.sources=./gateway/src/main/java
+          -Dsonar.java.binaries=./gateway/target
 
   deployment:
     runs-on: ubuntu-latest
     needs: test
-
+    env:
+      REPO: ${{ secrets.DOCKERHUB_GATEWAY }}
     steps:
       - uses: actions/checkout@v2
       - name: Download Maven build artifact
@@ -43,7 +64,8 @@ jobs:
           docker build -f gateway/Dockerfile -t flixned gateway
       - name: Tags
         run: |
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:gateway-service
+          docker tag flixned ${{ secrets.DOCKER_USER }}/$REPO:${GITHUB_SHA::8}
+          docker tag flixned ${{ secrets.DOCKER_USER }}/$REPO:latest
       - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/flixned:gateway-service
+          docker push ${{ secrets.DOCKER_USER }}/$REPO
