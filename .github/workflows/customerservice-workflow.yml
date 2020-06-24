@@ -4,6 +4,18 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "**"
+      - "customer_service/**"
+      - "!.idea/**"
+      - "!service_registration/**"
+      - "!auth/**"
+      - "!common/**"
+      - "!content_service/**"
+      - "!gateway/**"
+      - "!streaming_service/**"
+      - "!.github/workflows/**"
+      - ".github/workflows/customerservice-workflow.yml"
 jobs:
   test:
     name: test
@@ -23,11 +35,18 @@ jobs:
         with:
           name: artifact
           path: customer_service/target/customer_service-1.0-SNAPSHOT.jar
+      - name: run scan
+        run: sonar-scanner
+          -Dsonar.host.url=http://34.91.252.251:9000
+          -Dsonar.projectKey=flixned-customerservice
+          -Dsonar.sources=./customer_service/src/main/java
+          -Dsonar.java.binaries=./customer_service/target
 
   deployment:
     runs-on: ubuntu-latest
     needs: test
-
+    env:
+      REPO: ${{ secrets.DOCKERHUB_CUSTOMERSERVICE}}
     steps:
       - uses: actions/checkout@v2
       - name: Download Maven build artifact
@@ -43,7 +62,8 @@ jobs:
           docker build -f customer_service/Dockerfile -t flixned customer_service
       - name: Tags
         run: |
-          docker tag flixned ${{ secrets.DOCKER_USER }}/flixned:customer-service
+          docker tag flixned ${{ secrets.DOCKER_USER }}/$REPO:${GITHUB_SHA::8}
+          docker tag flixned ${{ secrets.DOCKER_USER }}/$REPO:latest
       - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/flixned:customer-service
+          docker push ${{ secrets.DOCKER_USER }}/$REPO
