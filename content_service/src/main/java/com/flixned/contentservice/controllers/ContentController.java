@@ -7,11 +7,9 @@ import com.flixned.contentservice.common.models.Serie;
 import com.flixned.contentservice.services.MovieService;
 import com.flixned.contentservice.services.PlaylistService;
 import com.flixned.contentservice.services.SerieService;
+import com.google.gson.Gson;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class ContentController {
@@ -69,5 +67,17 @@ public class ContentController {
     public @ResponseBody
     Serie getSerie(@RequestParam("serieId") String serieId) {
         return serieService.getSerieById(serieId);
+    }
+
+    @PostMapping(value = RestURIConstant.addNewSerie)
+    public @ResponseBody
+    String AddNewSerie(@RequestBody String serie) {
+        return serieService.newSerie(serie);
+    }
+
+    @PostMapping(value = RestURIConstant.addNewMovie)
+    public @ResponseBody
+    String AddNewMove(@RequestBody String movie) {
+        return movieService.newMovie(movie);
     }
 }
